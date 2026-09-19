@@ -1,4 +1,5 @@
 name: Farm metro regions
+# Regenerate committed regional genomes from their shape plans.
 on:
   push:
     branches: [feature/five-city-seed-farm]
