@@ -1,0 +1,160 @@
+{
+  "schema": "stratum.shape-plan.v1",
+  "name": "Brooklyn / East River Study",
+  "description": "Art-directed Brooklyn-inspired connected New York metro region; design constraints, not surveyed GIS.",
+  "cellSize": 48,
+  "coastline": [
+    [
+      -2200,
+      -2300
+    ],
+    [
+      -2500,
+      -1500
+    ],
+    [
+      -2450,
+      -400
+    ],
+    [
+      -2250,
+      700
+    ],
+    [
+      -1800,
+      1800
+    ],
+    [
+      -900,
+      2400
+    ],
+    [
+      300,
+      2450
+    ],
+    [
+      1500,
+      2100
+    ],
+    [
+      2300,
+      1200
+    ],
+    [
+      2500,
+      0
+    ],
+    [
+      2350,
+      -1200
+    ],
+    [
+      1700,
+      -2200
+    ],
+    [
+      500,
+      -2500
+    ],
+    [
+      -800,
+      -2480
+    ]
+  ],
+  "parks": [
+    {
+      "name": "Prospect-like park",
+      "x": 250,
+      "z": 300,
+      "halfWidth": 260,
+      "halfDepth": 390
+    },
+    {
+      "name": "Waterfront park",
+      "x": -1750,
+      "z": -350,
+      "halfWidth": 120,
+      "halfDepth": 360
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Downtown Brooklyn tower",
+      "x": -1050,
+      "z": -650,
+      "radius": 28,
+      "height": 245,
+      "family": 6
+    },
+    {
+      "name": "Atlantic crown",
+      "x": -300,
+      "z": 0,
+      "radius": 28,
+      "height": 175,
+      "family": 7
+    }
+  ],
+  "piers": [
+    {
+      "x": -2250,
+      "z": -700,
+      "halfWidth": 130,
+      "halfDepth": 24
+    },
+    {
+      "x": -2200,
+      "z": -200,
+      "halfWidth": 110,
+      "halfDepth": 22
+    }
+  ],
+  "waterfrontWidth": 34,
+  "districts": [
+    {
+      "name": "South Brooklyn",
+      "zMax": -900,
+      "targetMeanHeight": 38,
+      "targetTallFraction": 0.04,
+      "targetGlassFraction": 0.16
+    },
+    {
+      "name": "Downtown Brooklyn",
+      "zMax": 100,
+      "targetMeanHeight": 74,
+      "targetTallFraction": 0.24,
+      "targetGlassFraction": 0.38
+    },
+    {
+      "name": "Central Brooklyn",
+      "zMax": 1100,
+      "targetMeanHeight": 35,
+      "targetTallFraction": 0.025,
+      "targetGlassFraction": 0.12
+    },
+    {
+      "name": "North Brooklyn",
+      "zMax": 3000,
+      "targetMeanHeight": 47,
+      "targetTallFraction": 0.08,
+      "targetGlassFraction": 0.24
+    }
+  ],
+  "skylinePeaks": [
+    {
+      "x": -1050,
+      "z": -650,
+      "sigmaX": 520,
+      "sigmaZ": 480
+    },
+    {
+      "x": -1350,
+      "z": 1450,
+      "sigmaX": 420,
+      "sigmaZ": 420
+    }
+  ],
+  "targetCoverage": 0.68,
+  "targetHeightVariation": 0.55,
+  "provenance": "Procedural regional design target only; no third-party city geometry or GIS distributed."
+}
