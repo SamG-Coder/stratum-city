@@ -1,0 +1,29 @@
+name: Farm metro regions
+on:
+  push:
+    branches: [feature/five-city-seed-farm]
+    paths: ['.github/workflows/farm-regions.yml']
+permissions:
+  contents: write
+jobs:
+  farm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: feature/five-city-seed-farm}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - name: Farm connected New York regions
+        run: |
+          node tools/farm.mjs --plan cities/brooklyn.plan.json --out cities/brooklyn.genome.json --candidates 32768 --seed 20260921
+          node tools/farm.mjs --plan cities/queens.plan.json --out cities/queens.genome.json --candidates 32768 --seed 20260922
+          node tools/farm.mjs --plan cities/bronx.plan.json --out cities/bronx.genome.json --candidates 32768 --seed 20260923
+          node tools/farm.mjs --plan cities/jersey-city.plan.json --out cities/jersey-city.genome.json --candidates 32768 --seed 20260924
+      - name: Commit farmed genomes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 4189826+github-actions[bot]@users.noreply.github.com
+          git add cities/*.genome.json
+          git commit -m "Farm connected New York metro genomes" || exit 0
+          git push
