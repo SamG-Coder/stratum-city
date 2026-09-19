@@ -1,0 +1,156 @@
+{
+  "schema": "stratum.shape-plan.v1",
+  "name": "Jersey City / Newark Bay Study",
+  "description": "Art-directed Jersey City and Newark waterfront-inspired connected New York metro region; design constraints, not surveyed GIS.",
+  "cellSize": 48,
+  "coastline": [
+    [
+      -2450,
+      -2500
+    ],
+    [
+      -2550,
+      -700
+    ],
+    [
+      -2400,
+      900
+    ],
+    [
+      -1900,
+      2300
+    ],
+    [
+      -500,
+      2500
+    ],
+    [
+      900,
+      2350
+    ],
+    [
+      1750,
+      1600
+    ],
+    [
+      2050,
+      500
+    ],
+    [
+      1900,
+      -700
+    ],
+    [
+      1450,
+      -1800
+    ],
+    [
+      500,
+      -2450
+    ]
+  ],
+  "parks": [
+    {
+      "name": "Waterfront green",
+      "x": 1450,
+      "z": -300,
+      "halfWidth": 120,
+      "halfDepth": 420
+    },
+    {
+      "name": "Western park",
+      "x": -900,
+      "z": 850,
+      "halfWidth": 300,
+      "halfDepth": 260
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Hudson waterfront tower",
+      "x": 1250,
+      "z": -450,
+      "radius": 28,
+      "height": 285,
+      "family": 6
+    },
+    {
+      "name": "Journal square crown",
+      "x": 350,
+      "z": 250,
+      "radius": 28,
+      "height": 225,
+      "family": 7
+    },
+    {
+      "name": "Newark cluster tower",
+      "x": -1250,
+      "z": 500,
+      "radius": 28,
+      "height": 175,
+      "family": 6
+    }
+  ],
+  "piers": [
+    {
+      "x": 1900,
+      "z": -600,
+      "halfWidth": 120,
+      "halfDepth": 22
+    },
+    {
+      "x": 1880,
+      "z": 50,
+      "halfWidth": 100,
+      "halfDepth": 20
+    }
+  ],
+  "waterfrontWidth": 36,
+  "districts": [
+    {
+      "name": "Bay industrial",
+      "zMax": -950,
+      "targetMeanHeight": 30,
+      "targetTallFraction": 0.015,
+      "targetGlassFraction": 0.12
+    },
+    {
+      "name": "Jersey City waterfront",
+      "zMax": 100,
+      "targetMeanHeight": 86,
+      "targetTallFraction": 0.3,
+      "targetGlassFraction": 0.52
+    },
+    {
+      "name": "Journal Square",
+      "zMax": 1100,
+      "targetMeanHeight": 58,
+      "targetTallFraction": 0.16,
+      "targetGlassFraction": 0.3
+    },
+    {
+      "name": "Newark edge",
+      "zMax": 3000,
+      "targetMeanHeight": 38,
+      "targetTallFraction": 0.06,
+      "targetGlassFraction": 0.2
+    }
+  ],
+  "skylinePeaks": [
+    {
+      "x": 1250,
+      "z": -350,
+      "sigmaX": 460,
+      "sigmaZ": 520
+    },
+    {
+      "x": -1050,
+      "z": 650,
+      "sigmaX": 600,
+      "sigmaZ": 560
+    }
+  ],
+  "targetCoverage": 0.57,
+  "targetHeightVariation": 0.7,
+  "provenance": "Procedural regional design target only; no third-party city geometry or GIS distributed."
+}
