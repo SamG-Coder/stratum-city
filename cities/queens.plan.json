@@ -1,0 +1,142 @@
+{
+  "schema": "stratum.shape-plan.v1",
+  "name": "Queens / Long Island City Study",
+  "description": "Art-directed Queens-inspired connected New York metro region; design constraints, not surveyed GIS.",
+  "cellSize": 48,
+  "coastline": [
+    [
+      -2300,
+      -2400
+    ],
+    [
+      -2450,
+      -800
+    ],
+    [
+      -2300,
+      700
+    ],
+    [
+      -1900,
+      2200
+    ],
+    [
+      -400,
+      2500
+    ],
+    [
+      1300,
+      2400
+    ],
+    [
+      2400,
+      1500
+    ],
+    [
+      2550,
+      0
+    ],
+    [
+      2450,
+      -1500
+    ],
+    [
+      1600,
+      -2450
+    ],
+    [
+      0,
+      -2550
+    ]
+  ],
+  "parks": [
+    {
+      "name": "Large eastern park",
+      "x": 1150,
+      "z": 850,
+      "halfWidth": 420,
+      "halfDepth": 300
+    },
+    {
+      "name": "River park",
+      "x": -1900,
+      "z": 450,
+      "halfWidth": 110,
+      "halfDepth": 380
+    }
+  ],
+  "anchors": [
+    {
+      "name": "LIC glass tower",
+      "x": -1500,
+      "z": -250,
+      "radius": 28,
+      "height": 260,
+      "family": 6
+    },
+    {
+      "name": "Queens plaza crown",
+      "x": -1050,
+      "z": 200,
+      "radius": 28,
+      "height": 210,
+      "family": 7
+    }
+  ],
+  "piers": [
+    {
+      "x": -2250,
+      "z": -200,
+      "halfWidth": 120,
+      "halfDepth": 22
+    }
+  ],
+  "waterfrontWidth": 38,
+  "districts": [
+    {
+      "name": "South Queens",
+      "zMax": -900,
+      "targetMeanHeight": 29,
+      "targetTallFraction": 0.01,
+      "targetGlassFraction": 0.1
+    },
+    {
+      "name": "Long Island City",
+      "zMax": 250,
+      "targetMeanHeight": 78,
+      "targetTallFraction": 0.27,
+      "targetGlassFraction": 0.48
+    },
+    {
+      "name": "Central Queens",
+      "zMax": 1200,
+      "targetMeanHeight": 27,
+      "targetTallFraction": 0.008,
+      "targetGlassFraction": 0.08
+    },
+    {
+      "name": "North Queens",
+      "zMax": 3000,
+      "targetMeanHeight": 32,
+      "targetTallFraction": 0.018,
+      "targetGlassFraction": 0.12
+    }
+  ],
+  "skylinePeaks": [
+    {
+      "x": -1500,
+      "z": -200,
+      "sigmaX": 460,
+      "sigmaZ": 520
+    },
+    {
+      "x": -900,
+      "z": 400,
+      "sigmaX": 360,
+      "sigmaZ": 420
+    }
+  ],
+  "targetCoverage": 0.54,
+  "targetHeightVariation": 0.66,
+  "provenance": "Procedural regional design target only; no third-party city geometry or GIS distributed."
+}
