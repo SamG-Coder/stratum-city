@@ -11,7 +11,7 @@ try{
  if(r.error)throw Error('Offline seed farming needs a C++17 compiler. Install g++/LLVM and set CXX; ordinary city viewing does not require it.');if(r.status!==0)throw Error(r.stderr||'Seed farmer did not compile.');
  console.log(`Evaluating ${candidates.toLocaleString()} genomes against ${plan.name}...`);r=spawnSync(bin,[planBin,String(candidates),String(searchSeed)],{encoding:'utf8',maxBuffer:16*1024*1024,timeout:300000});if(r.status!==0)throw Error(r.stderr||'Seed farming failed.');const search=JSON.parse(r.stdout);encodeGenome(search.genes);
  const digest=createHash('sha256');for(const name of ['kernels/common.cu','kernels/plan.cu','kernels/farm.cu'])digest.update(await fs.readFile(path.join(root,name)));
- const genome={schema:'stratum.city-genome.v1',name:'Manhattan / Harbour — farmed',planFile:path.basename(planPath),planHash:createHash('sha256').update(Buffer.from(data.buffer)).digest('hex'),descriptorHash:digest.digest('hex'),geneNames:GENOME_NAMES,genes:search.genes,search};
+ const genome={schema:'stratum.city-genome.v1',name:plan.name+' — farmed',planFile:path.basename(planPath),planHash:createHash('sha256').update(Buffer.from(data.buffer)).digest('hex'),descriptorHash:digest.digest('hex'),geneNames:GENOME_NAMES,genes:search.genes,search};
  await fs.mkdir(path.dirname(output),{recursive:true});await fs.writeFile(output,JSON.stringify(genome,null,2)+'\n');
  console.log(`Baseline loss ${search.baseline.loss.toFixed(6)} → selected training ${search.train.loss.toFixed(6)}; fresh audit ${search.audit.loss.toFixed(6)}.`);console.log(output);
 }finally{await fs.rm(temp,{recursive:true,force:true});}
