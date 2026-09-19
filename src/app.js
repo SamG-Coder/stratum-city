@@ -1,4 +1,5 @@
 import {Engine,BUILD_ID} from './engine.js';
+import {METROS,DEFAULT_METRO,DEFAULT_REGION,regionById,loadRegion} from './metros.js';
 const $=id=>document.getElementById(id);
 const canvas=$('world'),engine=new Engine(canvas),params=new URLSearchParams(location.search);
 const keys=new Set(),pulse=new Float32Array(32);let ready=false,faulted=false,busy=false,hidden=false,dragging=false;
@@ -7,6 +8,7 @@ let seed=Number(params.get('seed')??1788);if(!Number.isInteger(seed)||seed<0||se
 let last=0,mouseX=0,mouseY=0,wheel=0,resizeTimer,noticeTimer,polling=false,resizePending=false;
 let frameStart=0,completed=0,displayFPS=0,frameWindow=performance.now(),lastPoll=0,lastInfo=null;
 const testing=params.has('test');
+let metro=METROS[params.get('metro')]||METROS[DEFAULT_METRO],region=regionById(metro,params.get('region'))||regionById(metro,DEFAULT_REGION);
 const compileConsole=$('compile-console'),compileCount=$('compile-count'),compilePercent=$('compile-percent'),compileLines=$('compile-lines'),compileEta=$('compile-eta'),compileJobs=new Map();let compileDone=0,compileTotal=11,totalLines=0,finishedLines=0,startupBegan=performance.now(),lastEta=0;
 function formatEta(ms){if(!Number.isFinite(ms)||ms<=0)return'Calculating ETA…';const s=Math.ceil(ms/1000);return s<60?`~${s}s remaining`:`~${Math.floor(s/60)}m ${s%60}s remaining`;}
 function updateEstimate(){
@@ -56,6 +58,9 @@ function chooseView(id){if(!ready)return;pulse[8]=id;document.querySelectorAll('
 function toggleNotes(){const p=$('notes');p.classList.toggle('closed');}
 function action(slot,text){if(!ready)return;pulse[slot]=1;if(text)notice(text);}
 $('quality').value=String(width);$('seed-label').textContent='Loading…';$('build-label').textContent=BUILD_ID;
+const regionSelect=$('region-select');for(const r of metro.regions){const o=document.createElement('option');o.value=r.id;o.textContent=r.name;regionSelect.append(o);}regionSelect.value=region.id;
+async function switchRegion(id){if(!ready||busy||id===region.id)return;const next=regionById(metro,id);if(!next)return;busy=true;ready=false;regionSelect.disabled=true;$('boot').hidden=false;$('status').textContent='Generating '+next.name;try{const data=await loadRegion(next);await engine.setCity(data.plan,data.genome);region=next;const u=new URL(location.href);u.searchParams.set('metro',DEFAULT_METRO);u.searchParams.set('region',region.id);history.replaceState(null,'',u);$('region-label').textContent=region.name.toUpperCase();clearControls();last=0;ready=true;$('boot').hidden=true;await poll();notice(region.name+' · farmed regional genome loaded');}catch(e){fatal(e);}finally{busy=false;regionSelect.disabled=false;}}
+regionSelect.onchange=e=>switchRegion(e.target.value);
 $('quality').onchange=e=>{width=Number(e.target.value);queueResize();};
 $('info-button').onclick=toggleNotes;$('close-notes').onclick=toggleNotes;
 $('fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>notice('Fullscreen is not available.'));
@@ -125,9 +130,9 @@ async function frame(now){
  if(now-lastPoll>650){lastPoll=now;poll();}
 }
 async function start(){try{
- const [w,h]=dimensions();await engine.init({width:w,height:h,onProgress:startupProgress,onError:fatal});
+ const [w,h]=dimensions(),initial=await loadRegion(region);$('region-label').textContent=region.name.toUpperCase();await engine.init({width:w,height:h,onProgress:startupProgress,onError:fatal,plan:initial.plan,genome:initial.genome});
  if(faulted)return;ready=true;document.body.classList.add('ready');$('boot').hidden=true;canvas.focus();
- window.stratum={engine,ready:true,chooseView,screenshot,inspect:()=>engine.inspect()};
+ window.stratum={engine,ready:true,chooseView,screenshot,switchRegion,metro,inspect:()=>engine.inspect()};
  engine.frame(1/60);await engine.runtime.idle();await poll();requestAnimationFrame(frame);
  if(matchMedia('(pointer:coarse)').matches)notice('This build uses keyboard flight controls. Drag to look; use the view buttons to explore.');
 }catch(e){fatal(e);}}
